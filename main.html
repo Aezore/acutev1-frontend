@@ -25,11 +25,11 @@
     </div>
 </nav>
 <div class="d-flex">
-    
+
     <div class="sidebar sidebar-dark bg-dark">
-           
+
         <ul class="list-unstyled">
-            
+
             <li><a href="#"><i class="fas fa-microchip"></i> START</a></li>
             <li>
                 <a href="#sm_expand_1" data-toggle="collapse">
@@ -44,12 +44,12 @@
             <li><a href="#"><i class="fas fa-terminal"></i> MONITOR MODE</a></li>
             <li><a href="#"><i class="fas fa-power-off"></i> RESET</a></li>
         </ul>
-       
-    </div>
-        
-    <div class="container">
 
-        <div class="content p-4">
+    </div>
+
+    <div id="main" class="container">
+
+        <div id="main-content" class="content p-4 d-none">
             <h1 class="mb-4"><i class="fas fa-tasks"></i> PROFILER TOOL</h1>
 
             <div class="card mb-4">
@@ -65,7 +65,7 @@
                             <b>17C10</b>
                         </div>
                         <div class="col-6 col-lg-3 text-right">
-                            Sub Sys/Version: 
+                            Sub Sys/Version:
                         </div>
                         <div class="col-6 col-lg-3 text-left">
                             <b>9.13</b>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="w-100"></div>
-                        <div id="pass" class="col text-center">
+                        <div id="pass" class="col text-center d-none">
                             <h5 class="badge-success">PASS</h5>
                         </div>
                     </div>
@@ -115,17 +115,30 @@
 </div>
 
 <script src="js/jquery.min.js"></script>
+<script src="js/jquery.transit.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/bootadmin.min.js"></script>
+<script src="js/loadingoverlay.min.js"></script>
 
 <script>
-   $('h5').click( function(){
-       var valor = 100;
-       $('#pass').fadeIn(500);
-       $('.progress-bar').css('width', valor+'%').attr('aria-valuenow', valor);
+    $('#main').LoadingOverlay("show", {
+    image       : "",
+    fontawesome : "fa fa-cog fa-spin",
+    background  : "rgba(255, 255, 255, 1)"
+    });
 
+    setTimeout( function() {
+        $('#main-content').removeClass('d-none');
+        $('#data-body').hide();
+        $('#main').LoadingOverlay("hide");
+    }, 1000);
+
+    $('h5').click( function() {
+        var valor = 100;
+        $('#data-body').fadeIn(500);
+        $('.progress-bar').css('width', valor+'%').attr('aria-valuenow', valor);
    });
-     
+
 </script>
 </body>
 </html>
